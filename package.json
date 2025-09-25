@@ -1,0 +1,11 @@
+{
+  "name": "joecounter",
+  "version": "1.0.0",
+  "description": "A counter utility with a webpage and Discord integration",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
