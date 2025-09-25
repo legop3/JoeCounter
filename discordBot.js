@@ -32,14 +32,16 @@ client.on("messageCreate", (message) => {
 
         const content = message.content.toLowerCase();
 
-    if (content === "!hate") {
-        increment();
-        message.reply(`Count incremented! Current count: ${count}`);
-    } else if (content === "!decrement") {
+    if (content.startsWith("!hate")) {
+        let cleaned = message.content.substring(message.content.indexOf(" ") + 1);
+        console.log('cleaned command text:', cleaned)
+        increment(cleaned);
+        message.reply(`Count incremented! Current count: ${count + 1}`);
+    } else if (content === "!remove") {
         decrement();
-        message.reply(`Count decremented! Current count: ${count}`);
+        message.reply(`Last entry removed! Current count: ${count}`);
     } else if (content === "!count") {
-        message.reply(`Current count is: ${count}`);
+        message.reply(`Current count is: ${count}, last comment: `);
   }
 });
 

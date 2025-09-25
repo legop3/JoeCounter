@@ -3,7 +3,7 @@ import { createServer } from 'node:http';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { Server } from 'socket.io';
-import { count, decrement, increment } from './counterSync.js';
+import { count, decrement, increment, sendComments } from './counterSync.js';
 import './discordBot.js';
 
 // GLOBAL CONFIG VARIABLES
@@ -25,15 +25,19 @@ server.listen(3000, () => {
 io.on('connection', (socket) => {
   console.log('a user connected');
   socket.emit('countUpdated', count);
+  sendComments();
 
 
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
 
-  socket.on('increment', () => {
-    increment();
+  socket.on('increment', (comment) => {
+
+    console.log('comment in index', comment)
+    increment(comment);
     io.emit('countUpdated', count);
+    sendComments();
   });
 
   socket.on('decrement', () => {
