@@ -1,5 +1,11 @@
 const socket = io();
 
+
+document.addEventListener('keydown', function(event) {
+    console.log(event.key)
+})
+
+
 document.getElementById('increment').addEventListener('click', () => {
 
     comment = document.getElementById('comment').value
@@ -28,7 +34,7 @@ socket.on('commentList', (list) => {
         if(element.comment != ''){
             commentDiv = document.createElement('div')
             commentDiv.innerHTML = `<div id='comment'>${element.comment}</div>`
-            commentDiv.classList.add('bg-gray-600', 'p-1', 'm-1', 'rounded-xl', 'text-center')
+            commentDiv.classList.add('bg-gray-600', 'p-1', 'm-1', 'rounded-xl', 'text-center', 'bg-opacity-50')
             document.getElementById('commentlist').appendChild(commentDiv)
         }
         

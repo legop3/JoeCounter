@@ -46,12 +46,13 @@ function updateCountFromDB() {
 updateCountFromDB()
 
 function sendComments() {
-
+    // let docsend
     db.find({}, function (err, docs) {
         // console.log(docs)
         io.emit('commentList', docs)
-
+        // docsend = docs
     })
+    // return docsend
 }
 
 

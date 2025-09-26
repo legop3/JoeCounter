@@ -1,6 +1,6 @@
 import { ActivityType, Client, GatewayIntentBits, Partials } from "discord.js";
 import dotenv from "dotenv";
-import { count, decrement, increment } from "./counterSync.js";
+import { count, decrement, increment, sendComments } from "./counterSync.js";
 
 dotenv.config();
 
@@ -36,13 +36,19 @@ client.on("messageCreate", (message) => {
         let cleaned = message.content.substring(message.content.indexOf(" ") + 1);
         console.log('cleaned command text:', cleaned)
         increment(cleaned);
-        message.reply(`Count incremented! Current count: ${count + 1}`);
+        sendComments()
+        message.reply(`Report added! \`${cleaned}\`\nCurrent count: ${count + 1}`);
     } else if (content === "!remove") {
         decrement();
-        message.reply(`Last entry removed! Current count: ${count}`);
+        message.reply(`Last entry removed!\nCurrent count: ${count}`);
+        sendComments()
     } else if (content === "!count") {
-        message.reply(`Current count is: ${count}, last comment: `);
-  }
+        message.reply(`Current count is: ${count}`);
+    } // else if (content === "!comments") {
+    //     let docs = sendComments()
+
+    //     console.log(docs)
+    // }
 });
 
 
